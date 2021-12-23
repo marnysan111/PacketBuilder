@@ -1,9 +1,9 @@
 package handler
 
 import (
+	"errors"
 	"fmt"
 	"net"
-	"os"
 	"time"
 
 	"github.com/google/gopacket"
@@ -17,12 +17,7 @@ var (
 	timeout time.Duration
 )
 
-func SendTCP() {
-	device := "enp0s8"
-	sMAC := "08:00:27:24:2c:c1"
-	dMAC := "0a:00:27:00:00:16"
-	sIP := "192.168.56.100"
-	dIP := "192.168.56.253"
+func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16) error {
 	srcMAC, _ := net.ParseMAC(sMAC)
 	dstMAC, _ := net.ParseMAC(dMAC)
 	eth := layers.Ethernet{
@@ -41,8 +36,8 @@ func SendTCP() {
 		DstIP:    dstIP,
 	}
 	tcpLayer := layers.TCP{
-		SrcPort:  layers.TCPPort(40000),
-		DstPort:  layers.TCPPort(80),
+		SrcPort:  layers.TCPPort(sPort),
+		DstPort:  layers.TCPPort(dPort),
 		SYN:      true,
 		FIN:      false,
 		RST:      false,
@@ -62,13 +57,14 @@ func SendTCP() {
 	}
 	err := gopacket.SerializeLayers(buf, opts, &eth, &ipLayer, &tcpLayer)
 	if err != nil {
-		panic(err)
+		return errors.New("(*>△<)<ナーンナーンっっ")
 	}
 	timeout = 3 * time.Second
 	h, err := pcap.OpenLive(device, snaplen, promisc, timeout)
 	if err != nil {
-		fmt.Fprint(os.Stdout, "[pcap OpenLive ERROR]", err, "\n")
+		return errors.New("(*>△<)<ナーンナーンっっ")
 	}
 	h.WritePacketData(buf.Bytes())
 	fmt.Println(buf.Bytes())
+	return nil
 }
