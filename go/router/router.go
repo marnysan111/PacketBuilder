@@ -1,6 +1,7 @@
 package router
 
 import (
+	"PacketBuilder/packet/handler"
 	"PacketBuilder/packet/status"
 	"fmt"
 
@@ -12,7 +13,7 @@ func TCP(r *gin.Context) {
 	r.BindJSON(&tcp)
 
 	fmt.Println(tcp)
-
+	handler.SendTCP()
 	r.JSON(200, gin.H{
 		"result": "SUCCESS",
 	})
