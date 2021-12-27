@@ -1,9 +1,9 @@
 package handler
 
 import (
+	"PacketBuilder/packet/status"
 	"fmt"
 	"net"
-	"os"
 	"time"
 
 	"github.com/google/gopacket"
@@ -15,16 +15,22 @@ var (
 	snaplen int32 = 1024
 	promisc bool
 	timeout time.Duration
+	buf     = gopacket.NewSerializeBuffer()
+	opts    = gopacket.SerializeOptions{
+		FixLengths:       true,
+		ComputeChecksums: true,
+	}
 )
 
-func SendTCP() {
-	device := "enp0s8"
-	sMAC := "08:00:27:24:2c:c1"
-	dMAC := "0a:00:27:00:00:16"
-	sIP := "192.168.56.100"
-	dIP := "192.168.56.253"
-	srcMAC, _ := net.ParseMAC(sMAC)
-	dstMAC, _ := net.ParseMAC(dMAC)
+func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16) error {
+	srcMAC, err := net.ParseMAC(sMAC)
+	if err != nil {
+		return &status.MyError{Msg: "srcMac conversion error", Code: 30000}
+	}
+	dstMAC, err := net.ParseMAC(dMAC)
+	if err != nil {
+		return &status.MyError{Msg: "dstMac conversion error", Code: 30001}
+	}
 	eth := layers.Ethernet{
 		SrcMAC:       srcMAC,
 		DstMAC:       dstMAC,
@@ -41,8 +47,8 @@ func SendTCP() {
 		DstIP:    dstIP,
 	}
 	tcpLayer := layers.TCP{
-		SrcPort:  layers.TCPPort(40000),
-		DstPort:  layers.TCPPort(80),
+		SrcPort:  layers.TCPPort(sPort),
+		DstPort:  layers.TCPPort(dPort),
 		SYN:      true,
 		FIN:      false,
 		RST:      false,
@@ -55,20 +61,16 @@ func SendTCP() {
 	}
 
 	tcpLayer.SetNetworkLayerForChecksum(&ipLayer)
-	buf := gopacket.NewSerializeBuffer()
-	opts := gopacket.SerializeOptions{
-		FixLengths:       true,
-		ComputeChecksums: true,
-	}
-	err := gopacket.SerializeLayers(buf, opts, &eth, &ipLayer, &tcpLayer)
+	err = gopacket.SerializeLayers(buf, opts, &eth, &ipLayer, &tcpLayer)
 	if err != nil {
-		panic(err)
+		return &status.MyError{Msg: "SerializeLayers error", Code: 30002}
 	}
 	timeout = 3 * time.Second
 	h, err := pcap.OpenLive(device, snaplen, promisc, timeout)
 	if err != nil {
-		fmt.Fprint(os.Stdout, "[pcap OpenLive ERROR]", err, "\n")
+		return &status.MyError{Msg: "OpenLive error", Code: 30003}
 	}
 	h.WritePacketData(buf.Bytes())
 	fmt.Println(buf.Bytes())
+	return nil
 }
