@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"errors"
+	"PacketBuilder/packet/status"
 	"fmt"
 	"net"
 	"time"
@@ -15,11 +15,22 @@ var (
 	snaplen int32 = 1024
 	promisc bool
 	timeout time.Duration
+	buf     = gopacket.NewSerializeBuffer()
+	opts    = gopacket.SerializeOptions{
+		FixLengths:       true,
+		ComputeChecksums: true,
+	}
 )
 
 func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16) error {
-	srcMAC, _ := net.ParseMAC(sMAC)
-	dstMAC, _ := net.ParseMAC(dMAC)
+	srcMAC, err := net.ParseMAC(sMAC)
+	if err != nil {
+		return &status.MyError{Msg: "srcMac conversion error", Code: 30000}
+	}
+	dstMAC, err := net.ParseMAC(dMAC)
+	if err != nil {
+		return &status.MyError{Msg: "dstMac conversion error", Code: 30001}
+	}
 	eth := layers.Ethernet{
 		SrcMAC:       srcMAC,
 		DstMAC:       dstMAC,
@@ -50,19 +61,14 @@ func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 	}
 
 	tcpLayer.SetNetworkLayerForChecksum(&ipLayer)
-	buf := gopacket.NewSerializeBuffer()
-	opts := gopacket.SerializeOptions{
-		FixLengths:       true,
-		ComputeChecksums: true,
-	}
-	err := gopacket.SerializeLayers(buf, opts, &eth, &ipLayer, &tcpLayer)
+	err = gopacket.SerializeLayers(buf, opts, &eth, &ipLayer, &tcpLayer)
 	if err != nil {
-		return errors.New("(*>△<)<ナーンナーンっっ")
+		return &status.MyError{Msg: "SerializeLayers error", Code: 30002}
 	}
 	timeout = 3 * time.Second
 	h, err := pcap.OpenLive(device, snaplen, promisc, timeout)
 	if err != nil {
-		return errors.New("(*>△<)<ナーンナーンっっ")
+		return &status.MyError{Msg: "OpenLive error", Code: 30003}
 	}
 	h.WritePacketData(buf.Bytes())
 	fmt.Println(buf.Bytes())

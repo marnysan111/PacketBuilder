@@ -1,6 +1,7 @@
 package status
 
 type TCP struct {
+	Device  string `JSON:"device"`
 	SrcIP   string `JSON:"srcIP"`
 	DstIP   string `JSON:"dstIP"`
 	SrcMac  string `JSON:"srcMac"`
@@ -8,5 +9,4 @@ type TCP struct {
 	SrcPort uint16 `JSON:"srcPort"`
 	DstPort uint16 `JSON:"dstPort"`
 	Times   int    `JSON:"times"`
-	Device  string `JSON:"device"`
 }
