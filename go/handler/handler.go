@@ -2,7 +2,6 @@ package handler
 
 import (
 	"PacketBuilder/packet/status"
-	"fmt"
 	"net"
 	"time"
 
@@ -71,6 +70,5 @@ func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 		return &status.MyError{Msg: "OpenLive error", Code: 30003}
 	}
 	h.WritePacketData(buf.Bytes())
-	fmt.Println(buf.Bytes())
 	return nil
 }
