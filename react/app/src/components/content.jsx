@@ -2,6 +2,8 @@ import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {Box} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
+import TCP from './tcp'
+
 export default function Content(props) {
     return (
         <React.Fragment>
@@ -11,9 +13,8 @@ export default function Content(props) {
                 <Tab>TCP</Tab>
                 <Tab>Title 2</Tab>
                 </TabList>
-
+                    <TCP />
                 <TabPanel>
-                <h2>Any content 1</h2>
                 </TabPanel>
                 <TabPanel>
                 <h2>Any content 2</h2>
