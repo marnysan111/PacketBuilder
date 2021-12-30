@@ -5,19 +5,22 @@ import 'react-tabs/style/react-tabs.css';
 import TCP from './tcp'
 
 export default function Content(props) {
+
     return (
         <React.Fragment>
             <Box m={3} >
             <Tabs>
                 <TabList>
+                <Tab>README</Tab>
                 <Tab>TCP</Tab>
-                <Tab>Title 2</Tab>
                 </TabList>
-                    <TCP />
                 <TabPanel>
+                    README
                 </TabPanel>
                 <TabPanel>
-                <h2>Any content 2</h2>
+                    <TCP 
+                        srcAdd = {props.srcAdd}
+                    />
                 </TabPanel>
             </Tabs>
             </Box>

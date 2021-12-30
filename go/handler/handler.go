@@ -30,6 +30,7 @@ func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 	if err != nil {
 		return &status.MyError{Msg: "dstMac conversion error", Code: 30001}
 	}
+
 	eth := layers.Ethernet{
 		SrcMAC:       srcMAC,
 		DstMAC:       dstMAC,

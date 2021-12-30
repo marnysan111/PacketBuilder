@@ -45,6 +45,6 @@ const templateStyle = makeStyles(() => ({
 
 function addClick(e) {
     e.preventDefault();
-    alert("Clicked");
+    alert("");
     console.log("Clicked addClick");
 }
