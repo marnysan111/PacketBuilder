@@ -8,6 +8,7 @@ import 'react-tabs/style/react-tabs.css';
 import Template from './components/template';
 import Header from './components/header';
 import TCP from './components/tcp';
+import Footer from './components/footer';
 
 function App() {
   const [device, setDevice] = useState();
@@ -51,7 +52,8 @@ function App() {
                     />
                 </TabPanel>
             </Tabs>
-            </Box>
+        </Box>
+        <Footer />
       </Grid>
       </Box>
     </React.Fragment>
