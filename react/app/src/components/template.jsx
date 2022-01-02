@@ -23,11 +23,8 @@ export default function Template(props) {
 
 const templateStyle = makeStyles(() => ({
     template_back: {
-        background: "",
-        height: "100vh",
-        width: "250px",
-        float: "left",
         textAlign: "center",
+        height: "75vh",
         borderRight: "1px solid rgba(0, 0, 0, 0.5)",
     },
     title: {

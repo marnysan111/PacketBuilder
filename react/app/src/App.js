@@ -1,5 +1,4 @@
 import React,{ useState, useEffect } from 'react'
-import axios from 'axios';
 import './App.css';
 import {Grid, Box, makeStyles} from '@material-ui/core';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -8,6 +7,7 @@ import 'react-tabs/style/react-tabs.css';
 import Template from './components/template';
 import Header from './components/header';
 import TCP from './components/tcp';
+import Footer from './components/footer';
 
 function App() {
   const [device, setDevice] = useState();
@@ -23,13 +23,15 @@ function App() {
   
   return (
     <React.Fragment>
-      <Header />
-      <Box className={classes.root}>
-      <Template />
+      {/*{srcIP}:{dstIP}*/}
+      <Box>
+
       <Grid container>
+        <Grid item xs={3}>
+          <Template />
+        </Grid>
+        <Grid item xs={9}>
         <Box m={3} >
-          <button onClick={send}>send</button>
-          {srcIP}:{dstIP}
             <Tabs>
                 <TabList>
                 <Tab>README</Tab>
@@ -51,26 +53,25 @@ function App() {
                     />
                 </TabPanel>
             </Tabs>
-            </Box>
+        </Box>
+        </Grid>
       </Grid>
       </Box>
+      <Footer />
+
+
+
     </React.Fragment>
   );
 }
 const useStyle = makeStyles(() => ({
   root: {
-    display: "flex",
+    height: "100%",    
+  },
+  item: {
+    borderRight: "1px solid rgba(0, 0, 0, 0.5)",
   }
 }))
 
-function send() {
-  axios.post('http://192.168.1.21:80/tcp',{"srcIP": "192.168.1.10","dstIP": "192.168.1.254", "srcMac": "08:00:27:24:2c:c1", "dstMac": "0a:00:27:00:00:16", "times": 2, "device": "enp0s8", "srcPort":80, "dstPort": 80})
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-  console.log("SEND")
-};
+
 export default App;

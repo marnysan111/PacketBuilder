@@ -9,10 +9,12 @@ export default function TCP(props) {
         <React.Fragment>
             <Box m={3} >
                 <h2>TCPによる攻撃</h2>
+                <form>
                 <InputTCP 
                    SrcIP = {props.srcIP}
                    DstIP = {props.dstIP}
                 />
+                </form>
             </Box>
         </React.Fragment>
     )

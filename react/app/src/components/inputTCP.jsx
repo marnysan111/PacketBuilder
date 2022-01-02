@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import 'react-tabs/style/react-tabs.css';
-import {Box} from '@material-ui/core';
+import {Grid, Box} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import MaskedInput from "react-text-mask";
+import { useTheme } from '@material-ui/core/styles';
 
 export default function InputTCP(props) {
-
+  const classes = useStyle();
     const srcIPadd = {
         guide: true,
         mask: value => {
@@ -117,9 +119,24 @@ export default function InputTCP(props) {
     return (
         <React.Fragment>
             <Box>
-            <MaskedInput {...srcIPadd}/>
-            <MaskedInput {...dstIPadd}/>
+              <label>送信先IPアドレス</label>
+              <MaskedInput {...srcIPadd} className="form-control" className={classes.input} />
+              <label>送信先IPアドレス</label>
+              <MaskedInput {...srcIPadd} className="form-control"/>
             </Box>
+
+            <Box>
+              <label>送信元IPアドレス</label>
+              <MaskedInput {...dstIPadd} className="form-control"/>
+            </Box>
+
         </React.Fragment>
     )
 }
+
+
+const useStyle = makeStyles(() => ({
+  input: {
+      marginRight: "70px"
+  }
+}))
