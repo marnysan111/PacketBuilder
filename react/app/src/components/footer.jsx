@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import {Box, TextField, List, ListItemText } from '@material-ui/core';
-<<<<<<< HEAD
 import { makeStyles } from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
 
@@ -25,18 +23,3 @@ const useStyle = makeStyles(() => ({
         width: "100%",
     }
 }))
-=======
-import 'react-tabs/style/react-tabs.css';
-import InputTCP from "./inputTCP";
-
-export default function Footer(props) {
-    
-    return (
-        <React.Fragment>
-            <footer className="">
-                
-            </footer>
-        </React.Fragment>
-    )
-}
->>>>>>> 2a45f058a4d52e7d82cbfaf22884772295ce4a6a

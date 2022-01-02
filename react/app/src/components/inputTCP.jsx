@@ -120,7 +120,6 @@ export default function InputTCP(props) {
         <React.Fragment>
             <Box>
               <label>送信先IPアドレス</label>
-<<<<<<< HEAD
               <MaskedInput {...srcIPadd} className="form-control" className={classes.input} />
               <label>送信先IPアドレス</label>
               <MaskedInput {...srcIPadd} className="form-control"/>
@@ -129,11 +128,6 @@ export default function InputTCP(props) {
             <Box>
               <label>送信元IPアドレス</label>
               <MaskedInput {...dstIPadd} className="form-control"/>
-=======
-              <MaskedInput {...srcIPadd} className="form-control"/>
-              <label>送信元IPアドレス</label>
-              <MaskedInput {...dstIPadd}/>
->>>>>>> 2a45f058a4d52e7d82cbfaf22884772295ce4a6a
             </Box>
 
         </React.Fragment>

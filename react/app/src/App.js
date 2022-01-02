@@ -54,11 +54,7 @@ function App() {
                 </TabPanel>
             </Tabs>
         </Box>
-<<<<<<< HEAD
         </Grid>
-=======
-        <Footer />
->>>>>>> 2a45f058a4d52e7d82cbfaf22884772295ce4a6a
       </Grid>
       </Box>
       <Footer />
