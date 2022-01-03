@@ -29,6 +29,7 @@ func main() {
 			"Authorization",
 		},
 	}))
+	r.GET("/device", router.Device)
 	r.POST("/tcp", router.TCP)
 	r.Run(":80")
 }

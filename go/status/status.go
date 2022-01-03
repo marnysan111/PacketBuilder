@@ -10,3 +10,9 @@ type TCP struct {
 	DstPort uint16 `JSON:"dstPort"`
 	Times   int    `JSON:"times"`
 }
+
+type Device struct {
+	Name  string `JSON:"device"`
+	IPADD string `JSON:"ipADD"`
+	Mask  string `JSON:"mask"`
+}

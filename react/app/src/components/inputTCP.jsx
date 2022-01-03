@@ -4,6 +4,7 @@ import {Grid, Box} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import MaskedInput from "react-text-mask";
 import { useTheme } from '@material-ui/core/styles';
+import '../App.css';
 
 export default function InputTCP(props) {
   const classes = useStyle();
@@ -119,15 +120,9 @@ export default function InputTCP(props) {
     return (
         <React.Fragment>
             <Box>
-              <label>送信先IPアドレス</label>
-              <MaskedInput {...srcIPadd} className="form-control" className={classes.input} />
-              <label>送信先IPアドレス</label>
-              <MaskedInput {...srcIPadd} className="form-control"/>
-            </Box>
-
-            <Box>
-              <label>送信元IPアドレス</label>
-              <MaskedInput {...dstIPadd} className="form-control"/>
+              <label className={classes.lavel}>IPアドレス</label>
+              <label className={classes.input}>送信元</label><MaskedInput {...srcIPadd} className="form-control" className={classes.input}/>
+              <label className={classes.input}>送信先</label><MaskedInput {...dstIPadd} className="form-control"/>
             </Box>
 
         </React.Fragment>
@@ -136,7 +131,10 @@ export default function InputTCP(props) {
 
 
 const useStyle = makeStyles(() => ({
+  lavel: {
+      marginRight: "40px",
+  },
   input: {
-      marginRight: "70px"
+    marginRight: "20px",
   }
 }))
