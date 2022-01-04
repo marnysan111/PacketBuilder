@@ -23,6 +23,7 @@ var (
 
 func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16) error {
 	srcMAC, err := net.ParseMAC(sMAC)
+
 	if err != nil {
 		return &status.MyError{Msg: "srcMac conversion error", Code: 30000}
 	}

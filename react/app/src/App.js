@@ -25,7 +25,6 @@ function App() {
     <React.Fragment>
       {/*{srcIP}:{dstIP}*/}
       <Box>
-
       <Grid container>
         <Grid item xs={3}>
           <Template />
