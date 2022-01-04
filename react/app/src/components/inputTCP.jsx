@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core';
 import MaskedInput from "react-text-mask";
 import { useTheme } from '@material-ui/core/styles';
 import '../App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default function InputTCP(props) {
   const classes = useStyle();
@@ -119,12 +121,27 @@ export default function InputTCP(props) {
     
     return (
         <React.Fragment>
+          {/*
             <Box>
+              <div class="input-group">
               <label className={classes.lavel}>IPアドレス</label>
-              <label className={classes.input}>送信元</label><MaskedInput {...srcIPadd} className="form-control" className={classes.input}/>
-              <label className={classes.input}>送信先</label><MaskedInput {...dstIPadd} className="form-control"/>
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Left addon</span>
+                </div>
+                <MaskedInput {...srcIPadd} className="" className={classes.input}/>
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Left addon</span>
+                </div>
+                <MaskedInput {...dstIPadd} className=""/>
+              </div>
             </Box>
-
+          */}
+            
+            <Box>
+            <label className={classes.lavel}>IPアドレス</label>
+              <label className={classes.input}>送信元</label><MaskedInput {...srcIPadd} className="" className={classes.input}/>
+              <label className={classes.input}>送信先</label><MaskedInput {...dstIPadd} className=""/>
+            </Box>
         </React.Fragment>
     )
 }

@@ -4,6 +4,8 @@ import {Box, Grid, TextField, List, ListItemText } from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
 import InputTCP from "./inputTCP";
 import InputDevice from "./inputDevice";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default function TCP(props) {
     const classes = useStyle();
@@ -11,7 +13,7 @@ export default function TCP(props) {
         <React.Fragment>
             <Box m={3} className={classes.text}>
                 <h2>TCPによる攻撃</h2>
-                <form>
+                <form className="">
                 <Grid>
                     <Grid item xs={12} lg={6}>
                         <InputDevice />

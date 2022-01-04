@@ -5,20 +5,18 @@ import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 
 export default function InputDevice(props) {
-    const [device, setDevice] = useState([])
-
+    const [device, setDevice] = useState({})
     useEffect(() => {
         axios.get('http://192.168.1.21:80/device')
         .then(res => {
-          setDevice(res.data)
-          console.log(res.data)
+          setDevice(res.data.devices)
         })
       }, []);
 
-    
     const classes = useStyle();
     return (
         <React.Fragment>
+          
         </React.Fragment>
     )
 }
