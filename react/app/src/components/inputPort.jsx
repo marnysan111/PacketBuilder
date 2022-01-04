@@ -16,7 +16,7 @@ export default function InputPort(props) {
                     <label className={classes.input}>送信元</label><MaskedInput className={classes.input}/>
                 </div>
                 <div className={classes.block}>
-                    <label className={classes.input}>送信先</label><MaskedInput mask={[/[0-9]/]} />
+                    <label className={classes.input}>送信先</label><MaskedInput />
                 </div>
               </Box>
           </React.Fragment>
