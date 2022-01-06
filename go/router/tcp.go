@@ -13,7 +13,7 @@ func TCP(r *gin.Context) {
 	r.BindJSON(&tcp)
 	fmt.Println(tcp)
 
-	err := handler.SendTCP(tcp.Device, tcp.SrcMac, tcp.DstMac, tcp.SrcIP, tcp.DstIP, tcp.SrcPort, tcp.DstPort)
+	err := handler.SendTCP(tcp.Device, tcp.SrcMac, tcp.DstMac, tcp.SrcIP, tcp.DstIP, tcp.SrcPort, tcp.DstPort, tcp.Timeout, tcp.Times)
 	if err != nil {
 		fmt.Println(err)
 		r.JSON(200, gin.H{

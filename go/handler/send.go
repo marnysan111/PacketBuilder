@@ -13,7 +13,7 @@ import (
 var (
 	snaplen int32 = 1024
 	promisc bool
-	timeout time.Duration
+	t       time.Duration
 	buf     = gopacket.NewSerializeBuffer()
 	opts    = gopacket.SerializeOptions{
 		FixLengths:       true,
@@ -21,7 +21,7 @@ var (
 	}
 )
 
-func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16) error {
+func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16, timeout int64, times int) error {
 	srcMAC, err := net.ParseMAC(sMAC)
 
 	if err != nil {
@@ -66,8 +66,8 @@ func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 	if err != nil {
 		return &status.MyError{Msg: "SerializeLayers error", Code: 30002}
 	}
-	timeout = 3 * time.Second
-	h, err := pcap.OpenLive(device, snaplen, promisc, timeout)
+	t = time.Duration(timeout) * time.Second
+	h, err := pcap.OpenLive(device, snaplen, promisc, t)
 	if err != nil {
 		return &status.MyError{Msg: "OpenLive error", Code: 30003}
 	}

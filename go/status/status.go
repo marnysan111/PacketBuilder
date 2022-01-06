@@ -8,6 +8,7 @@ type TCP struct {
 	DstMac  string `JSON:"dstMac"`
 	SrcPort uint16 `JSON:"srcPort"`
 	DstPort uint16 `JSON:"dstPort"`
+	Timeout int64  `JSON:"timeout"`
 	Times   int    `JSON:"times"`
 }
 
