@@ -20,7 +20,7 @@ export default function InputDevice(props) {
             <label className={classes.label}>デバイス名</label>
             <select>
               {device.map((data) =>
-                <option value={data.Name}>{data.Name}</option>
+                <option value={data.Name} id="device">{data.Name}</option>
               )}
             </select>
           </Box>

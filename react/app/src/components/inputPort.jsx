@@ -7,16 +7,15 @@ import MaskedInput from "react-text-mask";
 
 export default function InputPort(props) {
     const classes = useStyle();
-      
       return (
           <React.Fragment>
               <Box m={1}>
                 <label className={classes.label}>Port番号</label>
                 <div className={classes.block}>
-                    <label className={classes.input}>送信元</label><MaskedInput className={classes.input}/>
+                    <label className={classes.input}>送信元</label><MaskedInput id="srcPort" className={classes.input}/>
                 </div>
                 <div className={classes.block}>
-                    <label className={classes.input}>送信先</label><MaskedInput />
+                    <label className={classes.input}>送信先</label><MaskedInput id="dstPort" />
                 </div>
               </Box>
           </React.Fragment>

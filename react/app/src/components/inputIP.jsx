@@ -124,10 +124,10 @@ export default function InputIP(props) {
             <Box m={1}>
               <label className={classes.label}>IPアドレス</label>
               <div className={classes.block}>
-              <label className={classes.input}>送信元</label><MaskedInput {...srcIPadd} className={classes.input}/>
+              <label className={classes.input}>送信元</label><MaskedInput {...srcIPadd} id="srcIP" className={classes.input}/>
               </div>
               <div className={classes.block}>
-              <label className={classes.input}>送信先</label><MaskedInput {...dstIPadd} />
+              <label className={classes.input}>送信先</label><MaskedInput {...dstIPadd} id="dstIP" />
               </div>
             </Box>
         </React.Fragment>
