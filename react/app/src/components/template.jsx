@@ -24,7 +24,7 @@ export default function Template(props) {
 const templateStyle = makeStyles(() => ({
     template_back: {
         textAlign: "center",
-        height: "75vh",
+        height: "55vh",
         borderRight: "1px solid rgba(0, 0, 0, 0.5)",
     },
     title: {

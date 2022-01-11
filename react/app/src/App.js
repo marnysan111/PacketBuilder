@@ -1,11 +1,10 @@
-import React,{ useState, useEffect } from 'react'
+import React,{ useState} from 'react'
 import './App.css';
 import {Grid, Box, makeStyles} from '@material-ui/core';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import Template from './components/template';
-import Header from './components/header';
 import TCP from './components/tcp';
 import Footer from './components/footer';
 
@@ -18,9 +17,8 @@ function App() {
   const [srcPort, setSrcPort] = useState();
   const [dstPort, setDstPort] = useState();
   const [times, setTimes] = useState(); 
+  const [status, setStatus] = useState([]);
   const classes = useStyle();
-
-  
   return (
     <React.Fragment>
       {/*{srcIP}:{dstIP}*/}
@@ -49,17 +47,20 @@ function App() {
                       srcPort = {setSrcPort}
                       dstPort = {setDstPort}
                       times = {setTimes}
+                      setStatus = {setStatus}
+                      status = {status}
                     />
                 </TabPanel>
             </Tabs>
         </Box>
-        <p>aaaa{srcPort}</p>
         </Grid>
       </Grid>
       </Box>
-      <Footer />
+      <Footer
+        status = {status}
+      />
 
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
     </React.Fragment>
   );

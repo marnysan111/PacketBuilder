@@ -21,7 +21,7 @@ var (
 	}
 )
 
-func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16, timeout int64, times int) error {
+func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16, timeout int64) error {
 	srcMAC, err := net.ParseMAC(sMAC)
 
 	if err != nil {

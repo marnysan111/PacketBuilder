@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core';
-import {Box, Grid, TextField, List, ListItemText } from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 
@@ -11,6 +11,9 @@ export default function InputDevice(props) {
         .then(res => {
           setDevice(res.data.devices)
         })
+        .catch(function (error) {
+          console.log(error)
+        })
     }, []);
 
     const classes = useStyle();
@@ -18,9 +21,9 @@ export default function InputDevice(props) {
         <React.Fragment>
           <Box m={1}>
             <label className={classes.label}>デバイス名</label>
-            <select>
+            <select id="device">
               {device.map((data) =>
-                <option value={data.Name} id="device">{data.Name}</option>
+                <option value={data.Name}>{data.Name}</option>
               )}
             </select>
           </Box>

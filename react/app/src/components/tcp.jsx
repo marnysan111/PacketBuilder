@@ -1,27 +1,55 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { makeStyles } from '@material-ui/core';
-import {Box, Grid, TextField, List, ListItemText } from '@material-ui/core';
+import {Box, Grid} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
 import InputIP from "./inputIP";
 import InputDevice from "./inputDevice";
 import InputMAC from "./inputMAC";
 import InputPort from "./inputPort";
+import InputTimes from "./inputTimes";
+import axios from 'axios';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default function TCP(props) {
     const classes = useStyle();
-
+    const setStatus = props.setStatus;
+    const status = props.status
     const handleSubmit = e => {
         e.preventDefault();
+        const device = document.getElementById("device")
         const srcIP = e.target.elements["srcIP"];
         const dstIP = e.target.elements["dstIP"];
         const srcMAC = e.target.elements["srcMAC"];
         const dstMAC = e.target.elements["dstMAC"];
         const srcPort = e.target.elements["srcPort"];
         const dstPort = e.target.elements["dstPort"];
-        console.log(srcIP.value, dstIP.value,srcMAC.value, dstMAC.value,srcPort.value, dstPort.value);
+        const timeout = e.target.elements["timeout"];
+        const times = e.target.elements["times"];
+        console.log("aaaaa",typeof(srcIP.value),typeof(parseInt(dstPort.value)),typeof(timeout.value),typeof(times.value))
+        axios.post('http://192.168.1.21:80/tcp', {
+            "device": device.value, 
+            "srcIP": srcIP.value,
+            "dstIP": dstIP.value,
+            "srcMac": srcMAC.value, 
+            "dstMac": dstMAC.value, 
+            "srcPort": parseInt(srcPort.value), 
+            "dstPort": parseInt(dstPort.value),
+            "timeout": parseInt(timeout.value),
+            "times": parseInt(times.value),
+        }).then(function (response) {
+
+          })
+          .catch(function (error) {
+              console.log(error.response.data)
+            setStatus([...status, {
+                message: error.response.data.message,
+                err: error.response.data.err.Msg, 
+                code: error.response.data.err.Code, 
+                result: error.response.data.result}])
+          });
     }
 
     return (
@@ -51,6 +79,10 @@ export default function TCP(props) {
                         <InputPort 
                             SrcPort = {props.srcPort}
                             DstPort = {props.dstProt}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <InputTimes 
                         />
                     </Grid>
                 </Grid>
