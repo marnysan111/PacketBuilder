@@ -6,7 +6,14 @@ type TCP struct {
 	DstIP   string `JSON:"dstIP"`
 	SrcMac  string `JSON:"srcMac"`
 	DstMac  string `JSON:"dstMac"`
-	SrcPort uint16 `JSON:"srcPort"`
-	DstPort uint16 `JSON:"dstPort"`
+	SrcPort int    `JSON:"srcPort"` // uint16
+	DstPort int    `JSON:"dstPort"` // uint16
+	Timeout int    `JSON:"timeout"` // int64
 	Times   int    `JSON:"times"`
+}
+
+type Device struct {
+	Name  string `JSON:"device"`
+	IPADD string `JSON:"ipADD"`
+	Mask  string `JSON:"mask"`
 }
