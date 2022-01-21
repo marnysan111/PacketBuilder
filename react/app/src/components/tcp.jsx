@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core';
 import {Box, Grid} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
@@ -28,7 +28,6 @@ export default function TCP(props) {
         const dstPort = e.target.elements["dstPort"];
         const timeout = e.target.elements["timeout"];
         const times = e.target.elements["times"];
-        console.log("aaaaa",typeof(srcIP.value),typeof(parseInt(dstPort.value)),typeof(timeout.value),typeof(times.value))
         axios.post('http://192.168.1.21:80/tcp', {
             "device": device.value, 
             "srcIP": srcIP.value,
@@ -40,7 +39,7 @@ export default function TCP(props) {
             "timeout": parseInt(timeout.value),
             "times": parseInt(times.value),
         }).then(function (response) {
-
+            console.log(response)
           })
           .catch(function (error) {
               console.log(error.response.data)
