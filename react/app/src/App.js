@@ -3,8 +3,6 @@ import './App.css';
 import {Grid, Box, makeStyles} from '@material-ui/core';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-
-import Template from './components/template';
 import TCP from './components/tcp';
 import Footer from './components/footer';
 
@@ -21,13 +19,9 @@ function App() {
   const classes = useStyle();
   return (
     <React.Fragment>
-      {/*{srcIP}:{dstIP}*/}
       <Box>
       <Grid container>
-        <Grid item xs={3}>
-          <Template />
-        </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12}>
         <Box m={3} >
             <Tabs>
                 <TabList>

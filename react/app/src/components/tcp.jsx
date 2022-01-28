@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core';
 import {Box, Grid} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
@@ -40,10 +40,15 @@ export default function TCP(props) {
             "timeout": parseInt(timeout.value),
             "times": parseInt(times.value),
         }).then(function (response) {
-
-          })
+            console.log(response)
+            setStatus([...status, {
+                message: response.data.message,
+                err: response.data.err,
+                result: response.data.result,
+            }])
+        })
           .catch(function (error) {
-              console.log(error.response.data)
+            console.log(error.response.data)
             setStatus([...status, {
                 message: error.response.data.message,
                 err: error.response.data.err.Msg, 
