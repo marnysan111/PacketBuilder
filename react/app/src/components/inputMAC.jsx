@@ -1,8 +1,7 @@
-import React, {useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core';
-import {Box, Grid, TextField, List, ListItemText } from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
-import axios from 'axios';
 import MaskedInput from "react-text-mask";
 
 export default function InputMAC(props) {
