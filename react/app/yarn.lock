@@ -6141,7 +6141,7 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-material-table@^1.69.3:
+material-table@^1.66.0:
   version "1.69.3"
   resolved "https://registry.yarnpkg.com/material-table/-/material-table-1.69.3.tgz#3f282cffecf5461985965cd4a516bebb8069bf2d"
   integrity sha512-UT/eQbUqfAg6XstcnM8dOQNgWmWbH5tbRmwqfGfPKQUQQXq/jb1z2spFHXPJBhEZFmk+Q95HlopiE6nAHymLMw==

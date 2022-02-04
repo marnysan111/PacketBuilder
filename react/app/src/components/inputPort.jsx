@@ -4,7 +4,7 @@ import {Box} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
 import MaskedInput from "react-text-mask";
 
-export default function InputPort(props) {
+export default function InputPort() {
     const classes = useStyle();
       return (
           <React.Fragment>

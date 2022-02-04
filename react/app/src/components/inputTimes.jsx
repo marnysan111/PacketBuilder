@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import {Box} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
 
-export default function InputPort(props) {
+export default function InputPort() {
     const classes = useStyle();
       return (
           <React.Fragment>

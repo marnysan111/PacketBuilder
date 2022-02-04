@@ -4,10 +4,10 @@ import {Box} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
 import axios from 'axios';
 
-export default function InputDevice(props) {
+export default function InputDevice() {
     const [device, setDevice] = useState([])
     useEffect(() => {
-        axios.get('http://192.168.1.21:80/device')
+        axios.get('http://'+ process.env.REACT_APP_HOSTIP+'/device')
         .then(res => {
           setDevice(res.data.devices)
         })

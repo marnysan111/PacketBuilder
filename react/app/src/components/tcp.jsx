@@ -16,7 +16,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function TCP(props) {
     const classes = useStyle();
     const setStatus = props.setStatus;
-    const status = props.status
+    const status = props.status;
+    console.log("ENV読み込み", process.env.REACT_APP_HOSTIP)
+
     const handleSubmit = e => {
         e.preventDefault();
         const device = document.getElementById("device")
@@ -28,8 +30,11 @@ export default function TCP(props) {
         const dstPort = e.target.elements["dstPort"];
         const timeout = e.target.elements["timeout"];
         const times = e.target.elements["times"];
-        console.log("aaaaa",typeof(srcIP.value),typeof(parseInt(dstPort.value)),typeof(timeout.value),typeof(times.value))
-        axios.post('http://192.168.1.21:80/tcp', {
+        if (!srcIP.value || !dstIP.value || !srcMAC.value || !dstMAC.value || !srcPort || !dstPort || !timeout || !times){
+            alert("空入力の要素があります")
+            return false
+        }
+        axios.post('http://'+ process.env.REACT_APP_HOSTIP+'/tcp', {
             "device": device.value, 
             "srcIP": srcIP.value,
             "dstIP": dstIP.value,
@@ -43,6 +48,7 @@ export default function TCP(props) {
             console.log(response)
             setStatus([...status, {
                 message: response.data.message,
+                srcIP: response.data.srcIP,
                 err: response.data.err,
                 result: response.data.result,
             }])
@@ -51,6 +57,7 @@ export default function TCP(props) {
             console.log(error.response.data)
             setStatus([...status, {
                 message: error.response.data.message,
+                srcIP: error.response.data.srcIP,
                 err: error.response.data.err.Msg, 
                 code: error.response.data.err.Code, 
                 result: error.response.data.result}])

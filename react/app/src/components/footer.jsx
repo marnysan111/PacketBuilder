@@ -14,8 +14,8 @@ export default function Footer(props) {
                     columns={[
                         {title: 'メッセージ', field: 'message'},
                         {title: '結果', field: 'result'},
+                        {title: '送信先IPアドレス', field: 'srcIP'},
                         {title: 'エラーメッセージ', field: 'err'},
-                        {title: 'エラーコード', field: 'code'},
                     ]}
                     data={status}
                     

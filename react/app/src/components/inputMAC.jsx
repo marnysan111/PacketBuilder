@@ -4,7 +4,7 @@ import {Box} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
 import MaskedInput from "react-text-mask";
 
-export default function InputMAC(props) {
+export default function InputMAC() {
     const classes = useStyle();
       
       return (
