@@ -9,13 +9,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func TCP(r *gin.Context) {
+func SYN(r *gin.Context) {
 	var tcp status.TCP
 	r.BindJSON(&tcp)
 	fmt.Println(tcp)
 	var err error
 	for i := 0; i < tcp.Times; i++ {
-		err = handler.SendTCP(tcp.Device, tcp.SrcMac, tcp.DstMac, tcp.SrcIP, tcp.DstIP, uint16(tcp.SrcPort), uint16(tcp.DstPort), int64(tcp.Timeout))
+		err = handler.SendSYN(tcp.Device, tcp.SrcMac, tcp.DstMac, tcp.SrcIP, tcp.DstIP, uint16(tcp.SrcPort), uint16(tcp.DstPort), int64(tcp.Timeout))
 		if err != nil {
 			i = tcp.Times
 		}
@@ -36,5 +36,9 @@ func TCP(r *gin.Context) {
 			"err":     "",
 		})
 	}
+
+}
+
+func TCP(r *gin.Context) {
 
 }

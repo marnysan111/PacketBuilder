@@ -2,6 +2,8 @@ package handler
 
 import (
 	"PacketBuilder/packet/status"
+	"bufio"
+	"fmt"
 	"net"
 	"time"
 
@@ -21,7 +23,7 @@ var (
 	}
 )
 
-func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16, timeout int64) error {
+func SendSYN(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16, timeout int64) error {
 	srcMAC, err := net.ParseMAC(sMAC)
 
 	if err != nil {
@@ -73,4 +75,25 @@ func SendTCP(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 	}
 	h.WritePacketData(buf.Bytes())
 	return nil
+}
+
+func SendTCP() error {
+	conn, err := net.Dial("tcp", "192.168.1.254:8080")
+	if err != nil {
+		return err
+	}
+	defer conn.Close()
+
+	fmt.Fprintf(conn, "Hello, Socket Connection !")
+	status, err := bufio.NewReader(conn).ReadString('\n')
+	if err != nil {
+		return err
+	}
+	fmt.Println(status)
+
+	return nil
+}
+
+func SendHTTP() error {
+
 }

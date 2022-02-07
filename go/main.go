@@ -31,5 +31,6 @@ func main() {
 	}))
 	r.GET("/device", router.Device)
 	r.POST("/tcp", router.TCP)
+	r.POST("/syn", router.SYN)
 	r.Run(":80")
 }

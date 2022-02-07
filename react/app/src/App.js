@@ -28,9 +28,13 @@ function App() {
                 <TabList>
                 <Tab>README</Tab>
                 <Tab>TCP</Tab>
+                <Tab>SYN</Tab>
                 </TabList>
                 <TabPanel>
                     README
+                </TabPanel>
+                <TabPanel>
+                  
                 </TabPanel>
                 <TabPanel>
                     <TCP
