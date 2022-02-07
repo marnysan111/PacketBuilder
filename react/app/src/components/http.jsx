@@ -2,11 +2,11 @@ import React from "react";
 import {Box, Grid} from '@material-ui/core';
 
 
-export default function TCP() {
+export default function HTTP() {
     return (
         <React.Fragment>
             <Box m={3}>
-                <h2>TCP通信</h2>
+                <h2>HTTP通信</h2>
                 <form>
                     <Grid container>
                         <Grid item xs={12}>

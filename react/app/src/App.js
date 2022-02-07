@@ -3,8 +3,11 @@ import './App.css';
 import {Grid, Box, makeStyles} from '@material-ui/core';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import TCP from './components/tcp';
+import SYN from './components/syn';
 import Footer from './components/footer';
+import TCP from './components/tcp';
+import HTTP from './components/http';
+import Readme from './components/readme';
 
 function App() {
 
@@ -27,17 +30,21 @@ function App() {
             <Tabs>
                 <TabList>
                 <Tab>README</Tab>
+                <Tab>HTTP</Tab>
                 <Tab>TCP</Tab>
                 <Tab>SYN</Tab>
                 </TabList>
                 <TabPanel>
-                    README
+                    <Readme />
                 </TabPanel>
                 <TabPanel>
-                  
+                  <HTTP />
                 </TabPanel>
                 <TabPanel>
-                    <TCP
+                  <TCP />
+                </TabPanel>
+                <TabPanel>
+                    <SYN
                       device = {setDevice}
                       srcIP = {setSrcIP}
                       dstIP = {setDstIP}
