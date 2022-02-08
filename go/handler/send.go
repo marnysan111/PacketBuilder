@@ -2,9 +2,11 @@ package handler
 
 import (
 	"PacketBuilder/packet/status"
-	"bufio"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net"
+	"net/http"
 	"time"
 
 	"github.com/google/gopacket"
@@ -77,23 +79,34 @@ func SendSYN(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 	return nil
 }
 
-func SendTCP() error {
-	conn, err := net.Dial("tcp", "192.168.1.254:8080")
+func SendTCP(srcIP string, srcPort string) error {
+	conn, err := net.Dial("tcp", srcIP+srcPort)
 	if err != nil {
-		return err
+		return &status.MyError{Msg: "TCP connect error", Code: 30004}
 	}
 	defer conn.Close()
-
-	fmt.Fprintf(conn, "Hello, Socket Connection !")
-	status, err := bufio.NewReader(conn).ReadString('\n')
-	if err != nil {
-		return err
-	}
-	fmt.Println(status)
-
 	return nil
 }
 
-func SendHTTP() error {
+func SendHTTP(method string, srcIP string, srcPort string) error {
+	url := "http://192.168.1.254:8080"
+	response, err := http.Post(url, "", nil)
+	//response, err := http.Get(url)
 
+	if err != nil {
+		return &status.MyError{Msg: "HTTP connect error", Code: 30005}
+	}
+
+	defer response.Body.Close()
+
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(string(body))
+
+	//レスポンスのステータス
+	fmt.Println(string(response.Status))
+	return nil
 }
