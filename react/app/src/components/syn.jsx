@@ -16,10 +16,6 @@ export default function SYN(props) {
     const classes = useStyle();
     const setStatus = props.setStatus;
     const status = props.status;
-<<<<<<< HEAD
-=======
-    console.log("ENV読み込み", process.env.REACT_APP_HOSTIP)
->>>>>>> 48c9e4f18986f82f88a65411fa6c04818837453f
 
     const handleSubmit = e => {
         e.preventDefault();
