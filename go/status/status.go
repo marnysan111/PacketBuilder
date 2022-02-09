@@ -17,3 +17,9 @@ type Device struct {
 	IPADD string `JSON:"ipADD"`
 	Mask  string `JSON:"mask"`
 }
+
+type HTTP struct {
+	SrcIP   string `JSON:"srcIP"`
+	Methods string `JSON:"methods"`
+	times   int    `JSON:"times"`
+}

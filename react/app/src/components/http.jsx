@@ -1,11 +1,49 @@
 import React from "react";
 import {Box, Grid} from '@material-ui/core';
+import InputIPadd from "./inputIPadd";
+import InputMethods from "./inputMethods";
+import InputTime from "./inputTime";
+import axios from 'axios';
 
-export default function HTTP() {
+export default function HTTP(props) {
+    const setStatus = props.setStatus;
+    const status = props.status;
     const handleSubmit = e => {
         e.preventDefault();
-        alert("a")
+        const srcIP = e.target.elements["srcIP"].value;
+        const methods = e.target.elements["methods"].value;
+        const times = e.target.elements["times"].value;
+        if (!srcIP || !methods || !times){
+            alert("空入力の要素があります")
+            return false
+        }
+        if (times <= 0){
+            alert("送信回数は0以上の整数にしてください")
+            return false
+        }
+        axios.post('http://'+ process.env.REACT_APP_HOSTIP+'/http',{
+            "srcIP": srcIP,
+            "methods": methods,
+            "times": parseInt(times),
+        }).then(function (response) {
+            console.log(response)
+            setStatus([...status, {
+                message: response.data.message,
+                srcIP: response.data.srcIP,
+                err: response.data.err,
+                result: response.data.result,
+            }])
+        }).catch(function (error) {
+            console.log(error.response.data)
+            setStatus([...status, {
+                message: error.response.data.message,
+                srcIP: error.response.data.srcIP,
+                err: error.response.data.err.Msg, 
+                code: error.response.data.err.Code, 
+                result: error.response.data.result}])
+          });
     }
+
 
     return (
         <React.Fragment>
@@ -14,13 +52,13 @@ export default function HTTP() {
                 <form onSubmit={handleSubmit}>
                     <Grid container>
                         <Grid item xs={12}>
-                            送信先
+                            <InputIPadd />
                         </Grid>
                         <Grid item xs={12}>
-                            メソッド
+                            <InputMethods />
                         </Grid>
                         <Grid item xs={12}>
-                            回数
+                            <InputTime />
                         </Grid>
                         <button type="submit">送信</button>
                     </Grid>

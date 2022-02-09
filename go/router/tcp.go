@@ -39,6 +39,10 @@ func SYN(r *gin.Context) {
 
 }
 
+func HTTP(r *gin.Context) {
+
+}
+
 func TCP(r *gin.Context) {
 
 }

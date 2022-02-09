@@ -32,6 +32,10 @@ export default function SYN(props) {
             alert("空入力の要素があります")
             return false
         }
+        if (timeout.value <= 0){
+            alert("タイムアウト秒は0以上の整数にしてください")
+            return false
+        }
         if (times.value <= 0) {
             alert("送信回数は0以上の整数にしてください")
             return false

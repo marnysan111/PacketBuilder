@@ -38,7 +38,10 @@ function App() {
                     <Readme />
                 </TabPanel>
                 <TabPanel>
-                  <HTTP />
+                  <HTTP
+                    setStatus = {setStatus}
+                    status = {status}
+                  />
                 </TabPanel>
                 <TabPanel>
                   <TCP />
