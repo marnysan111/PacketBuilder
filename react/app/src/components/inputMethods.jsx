@@ -4,9 +4,10 @@ import {Box} from '@material-ui/core';
 import 'react-tabs/style/react-tabs.css';
 
 export default function InputMethods() {
+  //"GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
     const [methods, setMethods] = useState([
-        "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH"
-    ])
+      "GET", "POST"
+      ])
 
 
     const classes = useStyle();
@@ -14,7 +15,7 @@ export default function InputMethods() {
         <React.Fragment>
           <Box m={1}>
             <label className={classes.label}>メソッド名</label>
-            <select id="device">
+            <select id="methods">
               {methods.map((data) =>
                 <option value={data}>{data}</option>
               )}

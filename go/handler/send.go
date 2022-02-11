@@ -3,8 +3,6 @@ package handler
 import (
 	"PacketBuilder/packet/status"
 	"fmt"
-	"io/ioutil"
-	"log"
 	"net"
 	"net/http"
 	"time"
@@ -88,25 +86,23 @@ func SendTCP(srcIP string, srcPort string) error {
 	return nil
 }
 
-func SendHTTP(method string, srcIP string, srcPort string) error {
-	url := "http://192.168.1.254:8080"
-	response, err := http.Post(url, "", nil)
-	//response, err := http.Get(url)
+func SendHTTP(method string, srcIP string, port string) error {
+	url := "http://" + srcIP + ":" + port
+	fmt.Println(url)
+	if method == "GET" {
+		response, err := http.Get(url)
+		if err != nil {
+			return &status.MyError{Msg: "HTTP connect error", Code: 30005}
+		}
+		defer response.Body.Close()
 
-	if err != nil {
-		return &status.MyError{Msg: "HTTP connect error", Code: 30005}
+	} else if method == "POST" {
+		response, err := http.Post(url, "", nil)
+		if err != nil {
+			return &status.MyError{Msg: "HTTP connect error", Code: 30005}
+		}
+		defer response.Body.Close()
+
 	}
-
-	defer response.Body.Close()
-
-	body, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(string(body))
-
-	//レスポンスのステータス
-	fmt.Println(string(response.Status))
 	return nil
 }

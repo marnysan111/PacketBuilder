@@ -4,6 +4,7 @@ import InputIPadd from "./inputIPadd";
 import InputMethods from "./inputMethods";
 import InputTime from "./inputTime";
 import axios from 'axios';
+import InputPort from "./inputPort";
 
 export default function HTTP(props) {
     const setStatus = props.setStatus;
@@ -13,7 +14,8 @@ export default function HTTP(props) {
         const srcIP = e.target.elements["srcIP"].value;
         const methods = e.target.elements["methods"].value;
         const times = e.target.elements["times"].value;
-        if (!srcIP || !methods || !times){
+        const port =  e.target.elements["port"].value;
+        if (!srcIP || !methods || !times || !port){
             alert("空入力の要素があります")
             return false
         }
@@ -25,6 +27,7 @@ export default function HTTP(props) {
             "srcIP": srcIP,
             "methods": methods,
             "times": parseInt(times),
+            "port": port,
         }).then(function (response) {
             console.log(response)
             setStatus([...status, {
@@ -53,6 +56,9 @@ export default function HTTP(props) {
                     <Grid container>
                         <Grid item xs={12}>
                             <InputIPadd />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <InputPort />
                         </Grid>
                         <Grid item xs={12}>
                             <InputMethods />

@@ -1,6 +1,6 @@
 package status
 
-type TCP struct {
+type SYN struct {
 	Device  string `JSON:"device"`
 	SrcIP   string `JSON:"srcIP"`
 	DstIP   string `JSON:"dstIP"`
@@ -21,5 +21,6 @@ type Device struct {
 type HTTP struct {
 	SrcIP   string `JSON:"srcIP"`
 	Methods string `JSON:"methods"`
-	times   int    `JSON:"times"`
+	Times   int    `JSON:"times"`
+	Port    string `JSON:"port"`
 }

@@ -5,7 +5,7 @@ import 'react-tabs/style/react-tabs.css';
 import InputIP from "./inputIP";
 import InputDevice from "./inputDevice";
 import InputMAC from "./inputMAC";
-import InputPort from "./inputPort";
+import InputPorts from "./inputPorts";
 import InputTimes from "./inputTimes";
 import axios from 'axios';
 
@@ -94,7 +94,7 @@ export default function SYN(props) {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <InputPort 
+                        <InputPorts
                             SrcPort = {props.srcPort}
                             DstPort = {props.dstProt}
                         />
