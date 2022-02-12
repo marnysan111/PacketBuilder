@@ -40,7 +40,7 @@ export default function SYN(props) {
             alert("送信回数は0以上の整数にしてください")
             return false
         }
-        axios.post('http://'+ process.env.REACT_APP_HOSTIP+'/tcp', {
+        axios.post('http://'+ process.env.REACT_APP_HOSTIP+'/syn', {
             "device": device.value, 
             "srcIP": srcIP.value,
             "dstIP": dstIP.value,
@@ -51,22 +51,24 @@ export default function SYN(props) {
             "timeout": parseInt(timeout.value),
             "times": parseInt(times.value),
         }).then(function (response) {
-            console.log(response)
+            //console.log(response)
             setStatus([...status, {
                 message: response.data.message,
                 srcIP: response.data.srcIP,
                 err: response.data.err,
                 result: response.data.result,
+                times: response.data.times,
             }])
         })
           .catch(function (error) {
-            console.log(error.response.data)
+            //console.log(error.response.data)
             setStatus([...status, {
                 message: error.response.data.message,
                 srcIP: error.response.data.srcIP,
                 err: error.response.data.err.Msg, 
-                code: error.response.data.err.Code, 
-                result: error.response.data.result}])
+                result: error.response.data.result,
+                times: error.response.data.times,
+            }])
           });
     }
 

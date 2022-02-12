@@ -29,21 +29,23 @@ export default function HTTP(props) {
             "times": parseInt(times),
             "port": port,
         }).then(function (response) {
-            console.log(response)
+            //console.log(response)
             setStatus([...status, {
                 message: response.data.message,
                 srcIP: response.data.srcIP,
                 err: response.data.err,
                 result: response.data.result,
+                times: response.data.times,
             }])
         }).catch(function (error) {
-            console.log(error.response.data)
+            //console.log(error.response.data)
             setStatus([...status, {
                 message: error.response.data.message,
                 srcIP: error.response.data.srcIP,
                 err: error.response.data.err.Msg, 
                 code: error.response.data.err.Code, 
-                result: error.response.data.result}])
+                result: error.response.data.result,
+                times: error.response.data.times,}])
           });
     }
 

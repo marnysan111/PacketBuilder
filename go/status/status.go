@@ -24,3 +24,9 @@ type HTTP struct {
 	Times   int    `JSON:"times"`
 	Port    string `JSON:"port"`
 }
+
+type TCP struct {
+	SrcIP string `json:"srcIP,omitempty"`
+	Times int    `json:"times,omitempty"`
+	Port  string `json:"port,omitempty"`
+}

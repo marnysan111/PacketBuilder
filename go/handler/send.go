@@ -2,7 +2,6 @@ package handler
 
 import (
 	"PacketBuilder/packet/status"
-	"fmt"
 	"net"
 	"net/http"
 	"time"
@@ -78,7 +77,7 @@ func SendSYN(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 }
 
 func SendTCP(srcIP string, srcPort string) error {
-	conn, err := net.Dial("tcp", srcIP+srcPort)
+	conn, err := net.Dial("tcp", srcIP+":"+srcPort)
 	if err != nil {
 		return &status.MyError{Msg: "TCP connect error", Code: 30004}
 	}
@@ -88,7 +87,7 @@ func SendTCP(srcIP string, srcPort string) error {
 
 func SendHTTP(method string, srcIP string, port string) error {
 	url := "http://" + srcIP + ":" + port
-	fmt.Println(url)
+	//fmt.Println(url)
 	if method == "GET" {
 		response, err := http.Get(url)
 		if err != nil {

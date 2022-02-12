@@ -44,7 +44,10 @@ function App() {
                   />
                 </TabPanel>
                 <TabPanel>
-                  <TCP />
+                  <TCP 
+                    setStatus = {setStatus}
+                    status = {status}
+                  />
                 </TabPanel>
                 <TabPanel>
                     <SYN
