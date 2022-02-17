@@ -8,6 +8,7 @@ import Footer from './components/footer';
 import TCP from './components/tcp';
 import HTTP from './components/http';
 import Readme from './components/readme';
+import { Helmet } from "react-helmet"
 
 function App() {
 
@@ -23,6 +24,9 @@ function App() {
   const classes = useStyle();
   return (
     <React.Fragment>
+      <Helmet>
+        <title>Packet Builder</title>
+      </Helmet>
       <Box>
       <Grid container>
         <Grid item xs={12}>
