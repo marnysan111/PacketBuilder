@@ -69,10 +69,11 @@ func SendSYN(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 	}
 	t = time.Duration(timeout) * time.Second
 	h, err := pcap.OpenLive(device, snaplen, promisc, t)
-	defer h.Close()
 	if err != nil {
 		return &status.MyError{Msg: "OpenLive error", Code: 30003}
 	}
+	defer h.Close()
+
 	h.WritePacketData(buf.Bytes())
 	return nil
 }
