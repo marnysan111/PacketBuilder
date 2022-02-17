@@ -13,7 +13,7 @@ export default function Footer(props) {
                 <MaterialTable 
                     columns={[
                         {title: 'メッセージ', field: 'message'},
-                        {title: '送信先IPアドレス', field: 'srcIP'},
+                        {title: '送信先IPアドレス', field: 'dstIP'},
                         {title: '送信回数', field: 'times'},
                         {title: '結果', field: 'result'},
                         {title: 'エラーメッセージ', field: 'err'},

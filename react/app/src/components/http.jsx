@@ -32,7 +32,7 @@ export default function HTTP(props) {
             //console.log(response)
             setStatus([...status, {
                 message: response.data.message,
-                srcIP: response.data.srcIP,
+                dstIP: response.data.dstIP,
                 err: response.data.err,
                 result: response.data.result,
                 times: response.data.times,
@@ -41,7 +41,7 @@ export default function HTTP(props) {
             //console.log(error.response.data)
             setStatus([...status, {
                 message: error.response.data.message,
-                srcIP: error.response.data.srcIP,
+                dstIP: error.response.data.dstIP,
                 err: error.response.data.err.Msg, 
                 code: error.response.data.err.Code, 
                 result: error.response.data.result,
