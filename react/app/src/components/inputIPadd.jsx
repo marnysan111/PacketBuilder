@@ -69,7 +69,7 @@ export default function InputIPadd() {
             <Box m={1}>
               <label className={classes.label}>IPアドレス</label>
               <div className={classes.block}>
-              <label className={classes.input}>送信先</label><MaskedInput {...IPAdd} id="srcIP" className={classes.input}/>
+              <label className={classes.input}>送信先</label><MaskedInput {...IPAdd} id="dstIP" className={classes.input}/>
               </div>
             </Box>
         </React.Fragment>

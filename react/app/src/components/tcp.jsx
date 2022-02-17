@@ -11,10 +11,10 @@ export default function TCP(props) {
     const status = props.status;
     const handleSubmit = e => {
         e.preventDefault();
-        const srcIP = e.target.elements["srcIP"].value;
+        const dstIP = e.target.elements["dstIP"].value;
         const times = e.target.elements["times"].value;
         const port =  e.target.elements["port"].value;
-        if (!srcIP || !times || !port){
+        if (!dstIP || !times || !port){
             alert("空入力の要素があります")
             return false
         }
@@ -23,7 +23,7 @@ export default function TCP(props) {
             return false
         }
         axios.post('http://'+ process.env.REACT_APP_HOSTIP+'/tcp',{
-            "srcIP": srcIP,
+            "dstIP": dstIP,
             "times": parseInt(times),
             "port": port,
         }).then(function (response) {

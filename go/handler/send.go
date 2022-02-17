@@ -2,6 +2,7 @@ package handler
 
 import (
 	"PacketBuilder/packet/status"
+	"fmt"
 	"net"
 	"net/http"
 	"time"
@@ -78,8 +79,8 @@ func SendSYN(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 	return nil
 }
 
-func SendTCP(srcIP string, srcPort string) error {
-	conn, err := net.Dial("tcp", srcIP+":"+srcPort)
+func SendTCP(dstIP string, dstPort string) error {
+	conn, err := net.Dial("tcp", dstIP+":"+dstPort)
 	if err != nil {
 		return &status.MyError{Msg: "TCP connect error", Code: 30004}
 	}
@@ -87,12 +88,13 @@ func SendTCP(srcIP string, srcPort string) error {
 	return nil
 }
 
-func SendHTTP(method string, srcIP string, port string) error {
-	url := "http://" + srcIP + ":" + port
+func SendHTTP(method string, dstIP string, dstPort string) error {
+	url := "http://" + dstIP + ":" + dstPort
 	//fmt.Println(url)
 	if method == "GET" {
 		response, err := http.Get(url)
 		if err != nil {
+			fmt.Println(err)
 			return &status.MyError{Msg: "HTTP connect error", Code: 30005}
 		}
 		defer response.Body.Close()
@@ -100,6 +102,7 @@ func SendHTTP(method string, srcIP string, port string) error {
 	} else if method == "POST" {
 		response, err := http.Post(url, "", nil)
 		if err != nil {
+			fmt.Println(err)
 			return &status.MyError{Msg: "HTTP connect error", Code: 30005}
 		}
 		defer response.Body.Close()

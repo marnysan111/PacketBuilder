@@ -11,11 +11,11 @@ export default function HTTP(props) {
     const status = props.status;
     const handleSubmit = e => {
         e.preventDefault();
-        const srcIP = e.target.elements["srcIP"].value;
+        const dstIP = e.target.elements["dstIP"].value;
         const methods = e.target.elements["methods"].value;
         const times = e.target.elements["times"].value;
         const port =  e.target.elements["port"].value;
-        if (!srcIP || !methods || !times || !port){
+        if (!dstIP || !methods || !times || !port){
             alert("空入力の要素があります")
             return false
         }
@@ -24,7 +24,7 @@ export default function HTTP(props) {
             return false
         }
         axios.post('http://'+ process.env.REACT_APP_HOSTIP+'/http',{
-            "srcIP": srcIP,
+            "dstIP": dstIP,
             "methods": methods,
             "times": parseInt(times),
             "port": port,

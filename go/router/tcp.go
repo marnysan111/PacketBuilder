@@ -43,7 +43,7 @@ func HTTP(r *gin.Context) {
 	r.BindJSON(&data)
 	var err error
 	for i := 0; i < data.Times; i++ {
-		err = handler.SendHTTP(data.Methods, data.SrcIP, data.Port)
+		err = handler.SendHTTP(data.Methods, data.DstIP, data.Port)
 		if err != nil {
 			i = data.Times
 		}
@@ -51,7 +51,7 @@ func HTTP(r *gin.Context) {
 	if err != nil {
 		r.JSON(401, gin.H{
 			"message": "送信に失敗しました",
-			"srcIP":   data.SrcIP,
+			"dstIP":   data.DstIP,
 			"result":  "failure",
 			"err":     err,
 			"times":   data.Times,
@@ -59,7 +59,7 @@ func HTTP(r *gin.Context) {
 	} else {
 		r.JSON(http.StatusOK, gin.H{
 			"message": "送信に成功しました",
-			"srcIP":   data.SrcIP,
+			"dstIP":   data.DstIP,
 			"result":  "success",
 			"err":     "",
 			"times":   data.Times,
@@ -72,7 +72,7 @@ func TCP(r *gin.Context) {
 	r.BindJSON(&data)
 	var err error
 	for i := 0; i < data.Times; i++ {
-		err = handler.SendTCP(data.SrcIP, data.Port)
+		err = handler.SendTCP(data.DstIP, data.Port)
 		if err != nil {
 			i = data.Times
 		}
@@ -80,7 +80,7 @@ func TCP(r *gin.Context) {
 	if err != nil {
 		r.JSON(401, gin.H{
 			"message": "送信に失敗しました",
-			"srcIP":   data.SrcIP,
+			"dstIP":   data.DstIP,
 			"result":  "failure",
 			"err":     err,
 			"times":   data.Times,
@@ -88,7 +88,7 @@ func TCP(r *gin.Context) {
 	} else {
 		r.JSON(http.StatusOK, gin.H{
 			"message": "送信に成功しました",
-			"srcIP":   data.SrcIP,
+			"dstIP":   data.DstIP,
 			"result":  "success",
 			"err":     "",
 			"times":   data.Times,
