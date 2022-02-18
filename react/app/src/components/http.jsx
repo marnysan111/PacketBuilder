@@ -28,6 +28,7 @@ export default function HTTP(props) {
             "methods": methods,
             "times": parseInt(times),
             "port": port,
+            "type": "HTTP",
         }).then(function (response) {
             //console.log(response)
             setStatus([...status, {
@@ -36,6 +37,7 @@ export default function HTTP(props) {
                 err: response.data.err,
                 result: response.data.result,
                 times: response.data.times,
+                type: response.data.type,
             }])
         }).catch(function (error) {
             //console.log(error.response.data)
@@ -43,9 +45,10 @@ export default function HTTP(props) {
                 message: error.response.data.message,
                 dstIP: error.response.data.dstIP,
                 err: error.response.data.err.Msg, 
-                code: error.response.data.err.Code, 
                 result: error.response.data.result,
-                times: error.response.data.times,}])
+                times: error.response.data.times,
+                type: error.response.data.type,    
+            }])
           });
     }
 

@@ -10,6 +10,7 @@ type SYN struct {
 	DstPort int    `JSON:"dstPort"` // uint16
 	Timeout int    `JSON:"timeout"` // int64
 	Times   int    `JSON:"times"`
+	Type    string `JSON:"type"`
 }
 
 type Device struct {
@@ -23,10 +24,12 @@ type HTTP struct {
 	Methods string `JSON:"methods"`
 	Times   int    `JSON:"times"`
 	Port    string `JSON:"port"`
+	Type    string `JSON:"type"`
 }
 
 type TCP struct {
 	DstIP string `json:"dstIP,omitempty"`
 	Times int    `json:"times,omitempty"`
 	Port  string `json:"port,omitempty"`
+	Type  string `JSON:"type"`
 }

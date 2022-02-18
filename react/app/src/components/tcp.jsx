@@ -26,6 +26,7 @@ export default function TCP(props) {
             "dstIP": dstIP,
             "times": parseInt(times),
             "port": port,
+            "type": "TCP",
         }).then(function (response) {
             //console.log(response)
             setStatus([...status, {
@@ -34,6 +35,7 @@ export default function TCP(props) {
                 err: response.data.err,
                 result: response.data.result,
                 times: response.data.times,
+                type: response.data.type,   
             }])
         }).catch(function (error) {
             //console.log(error.response.data)
@@ -43,6 +45,7 @@ export default function TCP(props) {
                 err: error.response.data.err.Msg, 
                 result: error.response.data.result,
                 times: error.response.data.times,
+                type: error.response.data.type,   
             }])
           });
     }

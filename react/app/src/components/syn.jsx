@@ -50,14 +50,16 @@ export default function SYN(props) {
             "dstPort": parseInt(dstPort.value),
             "timeout": parseInt(timeout.value),
             "times": parseInt(times.value),
+            "type": "SYN",
         }).then(function (response) {
-            //console.log(response)
+            console.log(response)
             setStatus([...status, {
                 message: response.data.message,
-                srcIP: response.data.srcIP,
+                dstIP: response.data.dstIP,
                 err: response.data.err,
                 result: response.data.result,
                 times: response.data.times,
+                type: response.data.type,   
             }])
         })
           .catch(function (error) {
@@ -68,6 +70,7 @@ export default function SYN(props) {
                 err: error.response.data.err.Msg, 
                 result: error.response.data.result,
                 times: error.response.data.times,
+                type: error.response.data.type,   
             }])
           });
     }

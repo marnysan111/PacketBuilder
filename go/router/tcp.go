@@ -3,6 +3,7 @@ package router
 import (
 	"PacketBuilder/packet/handler"
 	"PacketBuilder/packet/status"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -18,21 +19,24 @@ func SYN(r *gin.Context) {
 			i = data.Times
 		}
 	}
+	fmt.Println(data.SrcPort)
 	if err != nil {
 		r.JSON(401, gin.H{
 			"message": "送信に失敗しました",
-			"srcIP":   data.SrcIP,
+			"dstIP":   data.DstIP,
 			"result":  "failure",
 			"err":     err,
 			"times":   data.Times,
+			"type":    data.Type,
 		})
 	} else {
 		r.JSON(http.StatusOK, gin.H{
 			"message": "送信に成功しました",
-			"srcIP":   data.SrcIP,
+			"dstIP":   data.DstIP,
 			"result":  "success",
 			"err":     "",
 			"times":   data.Times,
+			"type":    data.Type,
 		})
 	}
 
@@ -55,6 +59,7 @@ func HTTP(r *gin.Context) {
 			"result":  "failure",
 			"err":     err,
 			"times":   data.Times,
+			"type":    data.Type,
 		})
 	} else {
 		r.JSON(http.StatusOK, gin.H{
@@ -63,6 +68,7 @@ func HTTP(r *gin.Context) {
 			"result":  "success",
 			"err":     "",
 			"times":   data.Times,
+			"type":    data.Type,
 		})
 	}
 }
@@ -84,6 +90,7 @@ func TCP(r *gin.Context) {
 			"result":  "failure",
 			"err":     err,
 			"times":   data.Times,
+			"type":    data.Type,
 		})
 	} else {
 		r.JSON(http.StatusOK, gin.H{
@@ -92,6 +99,7 @@ func TCP(r *gin.Context) {
 			"result":  "success",
 			"err":     "",
 			"times":   data.Times,
+			"type":    data.Type,
 		})
 	}
 }
