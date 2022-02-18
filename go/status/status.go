@@ -19,14 +19,14 @@ type Device struct {
 }
 
 type HTTP struct {
-	DstIP   string `JSON:"drcIP"`
+	DstIP   string `JSON:"dstIP"`
 	Methods string `JSON:"methods"`
 	Times   int    `JSON:"times"`
 	Port    string `JSON:"port"`
 }
 
 type TCP struct {
-	DstIP string `json:"drcIP,omitempty"`
+	DstIP string `json:"dstIP,omitempty"`
 	Times int    `json:"times,omitempty"`
 	Port  string `json:"port,omitempty"`
 }
