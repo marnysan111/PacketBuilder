@@ -25,6 +25,7 @@ type HTTP struct {
 	Times   int    `JSON:"times"`
 	Port    string `JSON:"port"`
 	Type    string `JSON:"type"`
+	Sleep   int    `JSON:"sleep"`
 }
 
 type TCP struct {
@@ -32,4 +33,5 @@ type TCP struct {
 	Times int    `json:"times,omitempty"`
 	Port  string `json:"port,omitempty"`
 	Type  string `JSON:"type"`
+	Sleep int    `JSON:"sleep"`
 }

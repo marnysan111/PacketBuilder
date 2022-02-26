@@ -47,7 +47,7 @@ func HTTP(r *gin.Context) {
 	r.BindJSON(&data)
 	var err error
 	for i := 0; i < data.Times; i++ {
-		err = handler.SendHTTP(data.Methods, data.DstIP, data.Port)
+		err = handler.SendHTTP(data.Methods, data.DstIP, data.Port, data.Sleep)
 		if err != nil {
 			i = data.Times
 		}
@@ -78,7 +78,7 @@ func TCP(r *gin.Context) {
 	r.BindJSON(&data)
 	var err error
 	for i := 0; i < data.Times; i++ {
-		err = handler.SendTCP(data.DstIP, data.Port)
+		err = handler.SendTCP(data.DstIP, data.Port, data.Sleep)
 		if err != nil {
 			i = data.Times
 		}

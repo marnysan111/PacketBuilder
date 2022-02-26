@@ -80,9 +80,9 @@ func SendSYN(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 	return nil
 }
 
-func SendTCP(dstIP string, dstPort string) error {
+func SendTCP(dstIP string, dstPort string, sleep int) error {
 	rand.Seed(time.Now().UnixNano())
-	var sleepTime time.Duration = time.Duration(rand.Intn(4))
+	var sleepTime time.Duration = time.Duration(rand.Intn(sleep))
 	time.Sleep(sleepTime * time.Second)
 	conn, err := net.Dial("tcp", dstIP+":"+dstPort)
 	if err != nil {
@@ -92,9 +92,9 @@ func SendTCP(dstIP string, dstPort string) error {
 	return nil
 }
 
-func SendHTTP(method string, dstIP string, dstPort string) error {
+func SendHTTP(method string, dstIP string, dstPort string, sleep int) error {
 	rand.Seed(time.Now().UnixNano())
-	var sleepTime time.Duration = time.Duration(rand.Intn(4))
+	var sleepTime time.Duration = time.Duration(rand.Intn(sleep))
 	time.Sleep(sleepTime * time.Second)
 	url := "http://" + dstIP + ":" + dstPort
 	//fmt.Println(url)

@@ -5,6 +5,7 @@ import InputMethods from "./inputMethods";
 import InputTime from "./inputTime";
 import axios from 'axios';
 import InputPort from "./inputPort";
+import InputSleep from "./InputSleep";
 
 export default function TCP(props) {
     const setStatus = props.setStatus;
@@ -14,8 +15,13 @@ export default function TCP(props) {
         const dstIP = e.target.elements["dstIP"].value;
         const times = e.target.elements["times"].value;
         const port =  e.target.elements["port"].value;
+        const sleep = e.target.elements["sleep"].value;
         if (!dstIP || !times || !port){
             alert("空入力の要素があります")
+            return false
+        }
+        if (sleep <= 0) {
+            alert("遅延秒数は1以上の整数にしてください")
             return false
         }
         if (times <= 0){
@@ -27,6 +33,7 @@ export default function TCP(props) {
             "times": parseInt(times),
             "port": port,
             "type": "TCP",
+            "sleep": parseInt(sleep),
         }).then(function (response) {
             //console.log(response)
             setStatus([...status, {
@@ -65,6 +72,9 @@ export default function TCP(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <InputTime />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <InputSleep />
                         </Grid>
                         <button type="submit">送信</button>
                     </Grid>
