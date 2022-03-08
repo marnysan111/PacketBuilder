@@ -24,15 +24,14 @@ var (
 	}
 )
 
-func SendSYN(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16, timeout int64) error {
+func SendSYN(device string, sMAC string, dMAC string, sIP string, dIP string, sPort uint16, dPort uint16, timeout int64, times int, c chan error) {
 	srcMAC, err := net.ParseMAC(sMAC)
-
 	if err != nil {
-		return &status.MyError{Msg: "srcMac conversion error", Code: 30000}
+		c <- &status.MyError{Msg: "srcMac conversion error", Code: 30000}
 	}
 	dstMAC, err := net.ParseMAC(dMAC)
 	if err != nil {
-		return &status.MyError{Msg: "dstMac conversion error", Code: 30001}
+		c <- &status.MyError{Msg: "dstMac conversion error", Code: 30001}
 	}
 
 	eth := layers.Ethernet{
@@ -67,17 +66,22 @@ func SendSYN(device string, sMAC string, dMAC string, sIP string, dIP string, sP
 	tcpLayer.SetNetworkLayerForChecksum(&ipLayer)
 	err = gopacket.SerializeLayers(buf, opts, &eth, &ipLayer, &tcpLayer)
 	if err != nil {
-		return &status.MyError{Msg: "SerializeLayers error", Code: 30002}
+		c <- &status.MyError{Msg: "SerializeLayers error", Code: 30002}
 	}
 	t = time.Duration(timeout) * time.Second
 	h, err := pcap.OpenLive(device, snaplen, promisc, t)
 	if err != nil {
-		return &status.MyError{Msg: "OpenLive error", Code: 30003}
+		c <- &status.MyError{Msg: "OpenLive error", Code: 30003}
 	}
-	defer h.Close()
 
-	h.WritePacketData(buf.Bytes())
-	return nil
+	count := 0
+	for i := 0; i < times/2; i++ {
+		h.WritePacketData(buf.Bytes())
+		count += 1
+	}
+	fmt.Println(count)
+	h.Close()
+	c <- nil
 }
 
 func SendTCP(dstIP string, dstPort string, sleep int) error {

@@ -12,20 +12,31 @@ import (
 func SYN(r *gin.Context) {
 	var data status.SYN
 	r.BindJSON(&data)
-	var err error
-	for i := 0; i < data.Times; i++ {
-		err = handler.SendSYN(data.Device, data.SrcMac, data.DstMac, data.SrcIP, data.DstIP, uint16(data.SrcPort), uint16(data.DstPort), int64(data.Timeout))
-		if err != nil {
-			i = data.Times
-		}
-	}
-	fmt.Println(data.SrcPort)
-	if err != nil {
+	var err1 error
+	var err2 error
+	channel1 := make(chan error)
+	channel2 := make(chan error)
+	fmt.Println(data.Device, data.SrcMac, data.DstMac, data.SrcIP, data.DstIP, uint16(data.SrcPort), uint16(data.DstPort), int64(data.Timeout), data.Times/2)
+	go handler.SendSYN(data.Device, data.SrcMac, data.DstMac, data.SrcIP, data.DstIP, uint16(data.SrcPort), uint16(data.DstPort), int64(data.Timeout), data.Times, channel1)
+	go handler.SendSYN(data.Device, data.SrcMac, data.DstMac, data.SrcIP, data.DstIP, uint16(data.SrcPort), uint16(data.DstPort), int64(data.Timeout), data.Times, channel2)
+	err1 = <-channel1
+	err2 = <-channel2
+	fmt.Println(err1, err2)
+	if err1 != nil {
 		r.JSON(401, gin.H{
 			"message": "送信に失敗しました",
 			"dstIP":   data.DstIP,
 			"result":  "failure",
-			"err":     err,
+			"err":     err1,
+			"times":   data.Times,
+			"type":    data.Type,
+		})
+	} else if err2 != nil {
+		r.JSON(401, gin.H{
+			"message": "送信に失敗しました",
+			"dstIP":   data.DstIP,
+			"result":  "failure",
+			"err":     err2,
 			"times":   data.Times,
 			"type":    data.Type,
 		})
